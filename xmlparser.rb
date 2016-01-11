@@ -21,6 +21,7 @@ def xmlParser(xml)
 				attActive=0 if w=="<"					#it's a <!-- comment, cancel producing
 			when "-" then
 				isComment=1 if w=="!"
+				att<<x if (attActive==1 && isComment==0)
 			when ">" then								#close new att
 				if attActive==1 && isComment==0			#when producing and it's not a node whitin a <!-- comment -->
 					att.split							#remove leading and trailing whitespaces
@@ -58,7 +59,6 @@ THIS IS A DESCRIPTION
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 Lorem ipsum http://link.tld
-
 -->
 <ROOT-NODE>
 	<NODE1 attr="text1" attr2="text2">
@@ -77,7 +77,6 @@ Lorem ipsum http://link.tld
 	<NODE5 />
 	<NODE6 attr="_blank" />
 </ROOT-NODE>
-
 '
 
 #method call with benchmarking
