@@ -52,36 +52,12 @@ def xmlParser(xml)
 	arr													#return arr
 end
 
-inputXml = '<?xml version="1.0" encoding="windows-1252"?>
-<!-- 
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-THIS IS A DESCRIPTION
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-Lorem ipsum http://link.tld
--->
-<ROOT-NODE>
-	<NODE1 attr="text1" attr2="text2">
-		<!-- node in comment: <DONT_SHOW_THIS>-->
-		<SUBNODE1>100712345678901</SUBNODE1>
-		<SUBNODE2>TEXT</SUBNODE2>
-		<!-- multiline comment 
-			  XML1  ==> xml1
-			  TXML  ==> txml
-		-->
-		<SUBNODE3>1059</SUBNODE3>
-	</NODE1>
-	<NODE2/>
-	<NODE3 />
-	<NODE 4>
-	<NODE5 />
-	<NODE6 attr="_blank" />
-</ROOT-NODE>
-'
+#file to string
+File.open("test.xml","r"){|file| @inputXml=file.read}
 
 #method call with benchmarking
 method_time = Benchmark.realtime do
-	xmlParser(inputXml)
+	xmlParser(@inputXml)
 end
 
 puts "Parsing took "+method_time.to_s+" seconds"
