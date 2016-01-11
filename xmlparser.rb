@@ -24,7 +24,7 @@ def xmlParser(xml)
 				att<<x if (attActive==1 && isComment==0)
 			when ">" then								#close new att
 				if attActive==1 && isComment==0			#when producing and it's not a node whitin a <!-- comment -->
-					att.split							#remove leading and trailing whitespaces
+					att=att.lstrip.rstrip				#remove and trailing whitespace (e.g. < a > => <a>
 					att.gsub!(/\s+/, " ")				#replace long whitespaces with single space (needed to preserve when node has properties)
 					
 					att[0]!="/" ? level+=1 : level-=1	#calculate level
